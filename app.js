@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var db = require('knex')(
+/*var db = require('knex')(
     {
       client: 'sqlite3',
       connection: {
@@ -28,10 +28,18 @@ var db = require('knex')(
       },
       useNullAsDefault: true
     }
-);
+);*/
 
 //app.use('/', indexRouter);
 //app.use('/users', usersRouter);
+
+let dbURL = 'mongodb+srv://admin:<05k18a19y>@cluster0.qof3jjz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+
+const db = require('monk')(dbURL);
+
+const personajes = db.get('personajes');
+
+const estrategias = db.get('estrategias');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
